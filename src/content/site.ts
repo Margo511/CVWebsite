@@ -1,0 +1,60 @@
+import type { SiteConfig } from '../types/content';
+
+export const siteConfig: SiteConfig = {
+  language: 'es',
+  dateStyle: 'short',
+  accentColor: 'blue',
+  showAbout: true,
+  showExperience: true,
+  showTerminal: true,
+  showSystems: true,
+  showProjects: true,
+  showSkills: true,
+  showEducation: true,
+  showCertifications: true,
+  showContact: true,
+  cvPath: null, // Añade el PDF a public/cv/ y escribe '/cv/CV-Marcos-Gomez.pdf'.
+};
+
+// Todos los textos de presentación se editan aquí. language controla Intl,
+// no traduce estos textos: al cambiar de idioma, tradúcelos también.
+export const siteText = {
+  portfolio: 'Portfolio personal',
+  skipToContent: 'Ir al contenido',
+  menu: 'Menú',
+  closeMenu: 'Cerrar menú',
+  backToTop: 'Volver al inicio',
+  current: 'Actualidad',
+  currentlyAt: 'Actualmente en',
+  viewProjects: 'Explorar proyectos',
+  downloadCv: 'Descargar CV',
+  contactCta: 'Hablemos',
+  featured: 'Destacado',
+  details: 'Ver detalles del proyecto',
+  responsibilities: 'Mi contribución',
+  concepts: 'Áreas de integración',
+  github: 'GitHub',
+  demo: 'Ver demo',
+  credential: 'Ver credencial',
+  connections: 'Conexiones',
+  contactDescription: '¿Tienes un proyecto en mente? Podemos hablar de software, sistemas y de cómo hacer que funcionen mejor juntos.',
+  footer: 'Software con propósito.',
+  terminal: {
+    title: 'portfolio — terminal',
+    intro: 'Otra forma de conocer mi trabajo. Escribe help para ver los comandos.',
+    input: 'Escribe un comando',
+    submit: 'Ejecutar',
+    unknown: 'Comando no reconocido. Escribe help.',
+    empty: 'No hay contenido disponible.',
+    prompt: 'visitor@portfolio:~$',
+    help: {
+      help: 'Ver los comandos disponibles',
+      whoami: 'Perfil profesional',
+      experience: 'Experiencia profesional',
+      skills: 'Tecnologías y herramientas',
+      projects: 'Proyectos visibles',
+      education: 'Formación',
+      clear: 'Limpiar la terminal',
+    },
+  },
+};
