@@ -8,6 +8,22 @@ import { Projects } from '../src/components/sections/Projects';
 import { Terminal } from '../src/components/sections/Terminal';
 import { siteConfig } from '../src/content';
 import { getNavigation } from '../src/utils/selectors';
+import App from '../src/App';
+
+test('the assembled page has unique ids, one main heading and valid accessibility references', () => {
+  const markup = renderToStaticMarkup(createElement(App));
+  const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  const available = new Set(ids);
+  assert.equal(available.size, ids.length, 'Duplicate IDs break fragment navigation and labelling');
+  assert.equal([...markup.matchAll(/<h1\b/g)].length, 1);
+  assert.equal([...markup.matchAll(/<main\b/g)].length, 1);
+  for (const [, references] of markup.matchAll(/\b(?:aria-labelledby|aria-describedby|aria-controls|for)="([^"]+)"/g)) {
+    for (const reference of references.split(/\s+/)) assert(available.has(reference), `Missing ID: ${reference}`);
+  }
+  for (const [, fragment] of markup.matchAll(/href="#([^"]*)"/g)) {
+    assert(available.has(fragment), `Missing anchor target: ${fragment}`);
+  }
+});
 
 test('menu disclosure references a named navigation landmark and starts collapsed', () => {
   const markup = renderToStaticMarkup(createElement(Header));

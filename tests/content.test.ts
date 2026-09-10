@@ -128,9 +128,16 @@ test('English mode translates every visible content source and terminal output',
   assert.equal(getExperiences('en')[0].location, 'Spain');
   assert.equal(getProjects('en')[0].shortDescription, 'Automated integration between an ERP and an e-commerce platform.');
   assert.equal(getEducation('en')[0].location, 'Valladolid, Spain');
-  assert.equal(getTranslatedNavigation('en')[0].label, 'About');
+  assert.equal(getTranslatedNavigation('en').find(item => item.id === 'about')?.label, 'About');
   assert.equal(getSiteText('en').current, 'Present');
   assert(runCommand('experience', 'en').includes('Present'));
   assert(runCommand('experience', 'en').includes('Development and customization'));
   assert(runCommand('help', 'en').includes('Show available commands'));
+});
+
+test('editorial section order leads with work, experience and technical context', () => {
+  for (const language of ['es', 'en'] as const) {
+    assert.deepEqual(getTranslatedNavigation(language).slice(0, 5).map(item => item.id),
+      ['projects', 'experience', 'systems', 'skills', 'about']);
+  }
 });
