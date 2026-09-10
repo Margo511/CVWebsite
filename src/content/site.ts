@@ -2,6 +2,7 @@ import type { SiteConfig } from '../types/content';
 
 export const siteConfig: SiteConfig = {
   language: 'es',
+  theme: 'system',
   dateStyle: 'short',
   accentColor: 'blue',
   showAbout: true,
@@ -16,14 +17,16 @@ export const siteConfig: SiteConfig = {
   cvPath: null, // Añade el PDF a public/cv/ y escribe '/cv/CV-Marcos-Gomez.pdf'.
 };
 
-// Todos los textos de presentación se editan aquí. language controla Intl,
-// no traduce estos textos: al cambiar de idioma, tradúcelos también.
 export const siteText = {
+  es: {
   portfolio: 'Portfolio personal',
   skipToContent: 'Ir al contenido',
   menu: 'Menú',
   closeMenu: 'Cerrar menú',
   backToTop: 'Volver al inicio',
+  lightMode: 'Activar modo claro',
+  darkMode: 'Activar modo oscuro',
+  language: 'Idioma',
   current: 'Actualidad',
   currentlyAt: 'Actualmente en',
   viewProjects: 'Explorar proyectos',
@@ -55,6 +58,50 @@ export const siteText = {
       projects: 'Proyectos visibles',
       education: 'Formación',
       clear: 'Limpiar la terminal',
+    },
+  },
+  },
+  en: {
+    portfolio: 'Personal portfolio',
+    skipToContent: 'Skip to content',
+    menu: 'Menu',
+    closeMenu: 'Close menu',
+    backToTop: 'Back to top',
+    lightMode: 'Switch to light mode',
+    darkMode: 'Switch to dark mode',
+    language: 'Language',
+    current: 'Present',
+    currentlyAt: 'Currently at',
+    viewProjects: 'Explore projects',
+    downloadCv: 'Download résumé',
+    contactCta: "Let's talk",
+    featured: 'Featured',
+    details: 'View project details',
+    responsibilities: 'My contribution',
+    concepts: 'Integration areas',
+    github: 'GitHub',
+    demo: 'View demo',
+    credential: 'View credential',
+    connections: 'Connections',
+    contactDescription: 'Have a project in mind? We can talk about software, systems, and how to make them work better together.',
+    footer: 'Software with purpose.',
+    terminal: {
+      title: 'portfolio — terminal',
+      intro: 'Another way to explore my work. Type help to see the commands.',
+      input: 'Type a command',
+      submit: 'Run',
+      unknown: 'Command not found. Type help.',
+      empty: 'No content available.',
+      prompt: 'visitor@portfolio:~$',
+      help: {
+        help: 'Show available commands',
+        whoami: 'Professional profile',
+        experience: 'Professional experience',
+        skills: 'Technologies and tools',
+        projects: 'Visible projects',
+        education: 'Education',
+        clear: 'Clear the terminal',
+      },
     },
   },
 };

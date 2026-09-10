@@ -14,6 +14,7 @@ import { assetUrl, externalUrl, getSocialLinks } from '../src/utils/links';
 import { getCurrentExperiences, getNavigation, getSectionVisibility } from '../src/utils/selectors';
 import { formatIndex, getVisibleProjects, sortExperiences } from '../src/utils/sort';
 import { runCommand } from '../src/utils/terminal';
+import { getEducation, getExperiences, getProfile, getProjects, getSiteText, getTranslatedNavigation } from '../src/utils/i18n';
 import type { Experience, Project, SiteConfig } from '../src/types/content';
 
 const render = (component: Parameters<typeof createElement>[0]) => renderToStaticMarkup(createElement(component));
@@ -95,7 +96,7 @@ test('dates reject malformed months and unknown education end is not current', (
   assert.equal(formatDate(null), '');
   assert.equal(formatDate('2024-07', 'es', 'long'), 'Julio 2024');
   assert.equal(formatDate('2024-07', 'en', 'short'), 'Jul 2024');
-  assert(!formatExperienceDate(content.education[0]).includes(content.siteText.current));
+  assert(!formatExperienceDate(content.education[0]).includes(content.siteText.es.current));
 });
 
 test('optional and unsafe URLs produce no dead controls; root assets are base-aware', () => {
@@ -118,6 +119,18 @@ test('terminal reads current profile, new skill categories and education directl
     assert(runCommand('skills').includes('Docker fixture'));
     assert(runCommand('education').includes(content.education[0].institution));
     assert.equal(runCommand('clear'), '');
-    assert.equal(runCommand('unknown'), content.siteText.terminal.unknown);
+    assert.equal(runCommand('unknown'), content.siteText.es.terminal.unknown);
   } finally { content.profile.headline = headline; content.skillGroups.pop(); }
+});
+
+test('English mode translates every visible content source and terminal output', () => {
+  assert.equal(getProfile('en').location, 'Spain');
+  assert.equal(getExperiences('en')[0].location, 'Spain');
+  assert.equal(getProjects('en')[0].shortDescription, 'Automated integration between an ERP and an e-commerce platform.');
+  assert.equal(getEducation('en')[0].location, 'Valladolid, Spain');
+  assert.equal(getTranslatedNavigation('en')[0].label, 'About');
+  assert.equal(getSiteText('en').current, 'Present');
+  assert(runCommand('experience', 'en').includes('Present'));
+  assert(runCommand('experience', 'en').includes('Development and customization'));
+  assert(runCommand('help', 'en').includes('Show available commands'));
 });

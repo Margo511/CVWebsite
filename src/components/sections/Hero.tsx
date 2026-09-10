@@ -1,10 +1,15 @@
-import { profile, siteConfig, siteText } from '../../content';
+import { siteConfig } from '../../content';
 import { assetUrl } from '../../utils/links';
 import { getCurrentExperiences, getSectionVisibility } from '../../utils/selectors';
+import { usePreferences } from '../Preferences';
+import { getExperiences, getProfile, getSiteText } from '../../utils/i18n';
 
 export function Hero() {
+  const { language } = usePreferences();
+  const profile = getProfile(language);
+  const siteText = getSiteText(language);
   const visible = getSectionVisibility();
-  const current = getCurrentExperiences();
+  const current = getCurrentExperiences(getExperiences(language));
   const cv = assetUrl(siteConfig.cvPath);
   return <section className="hero" aria-labelledby="hero-title">
     <div className="hero-kicker"><span>{siteText.portfolio}</span><span>{profile.location}</span></div>

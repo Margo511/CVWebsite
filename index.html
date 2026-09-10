@@ -6,6 +6,22 @@
     <meta name="theme-color" content="#101317" />
     <meta name="description" content="" />
     <title>Portfolio</title>
+    <script>
+      (() => {
+        let savedTheme = null;
+        let savedLanguage = null;
+        try {
+          savedTheme = localStorage.getItem('portfolio-theme');
+          savedLanguage = localStorage.getItem('portfolio-language');
+        } catch {}
+        const theme = savedTheme === 'light' || savedTheme === 'dark'
+          ? savedTheme
+          : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        if (savedLanguage === 'es' || savedLanguage === 'en') document.documentElement.lang = savedLanguage;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

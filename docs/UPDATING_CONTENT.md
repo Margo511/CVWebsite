@@ -184,6 +184,8 @@ about: [
 
 Puedes añadir o eliminar párrafos. El nombre, ubicación y especialización también viven aquí. Los títulos de secciones están en `navigation.ts`; el resto de textos de interfaz está en `site.ts`, dentro de `siteText`.
 
+La versión española es el contenido principal. Para actualizar su versión inglesa, modifica el bloque correspondiente de `src/content/translations.ts`. Los IDs enlazan ambas versiones, por lo que empresa, fechas, enlaces y configuración siguen definidos una sola vez.
+
 ## Cambiar GitHub
 
 En `src/content/social.ts`:
@@ -244,9 +246,28 @@ Para cambiar el color o las fechas:
 accentColor: 'blue', // También 'green' o 'violet'.
 language: 'es',
 dateStyle: 'long', // 'short' para abreviar el mes.
+theme: 'system', // También 'light' o 'dark' como valor inicial.
 ```
 
-`language` controla las fechas y el idioma del documento. No traduce tus textos: para otro idioma, traduce el contenido y `siteText`.
+`language` controla el idioma inicial. El visitante puede cambiar entre español e inglés y entre tema claro y oscuro; sus elecciones se guardan en el navegador. Los textos de interfaz de ambos idiomas están en `siteText`, y las traducciones del contenido profesional están en `translations.ts`.
+
+## Traducir contenido nuevo al inglés
+
+Cuando añadas una experiencia, proyecto, formación o nodo de sistemas, añade en `src/content/translations.ts` una entrada con el mismo `id`. Por ejemplo, para `id: 'nueva-empresa'`:
+
+```ts
+experiences: {
+  // ...traducciones existentes
+  'nueva-empresa': {
+    role: 'Software Engineer',
+    location: 'Spain',
+    description: 'Development of software solutions.',
+    responsibilities: ['Backend development and integrations.'],
+  },
+},
+```
+
+La compilación se detiene con un mensaje claro si falta la traducción inglesa de un elemento nuevo.
 
 ## Añadir una imagen a un proyecto
 

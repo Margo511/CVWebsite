@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { profile, siteConfig, siteText } from './content';
+import { siteConfig } from './content';
 import { Header } from './components/layout/Header';
 import { Hero } from './components/sections/Hero';
 import { About, Certifications, Contact, Education, Skills } from './components/sections/ContentSections';
@@ -10,6 +10,8 @@ import { Terminal } from './components/sections/Terminal';
 import { getNavigation } from './utils/selectors';
 import { formatIndex } from './utils/sort';
 import type { SectionId } from './types/content';
+import { usePreferences } from './components/Preferences';
+import { getProfile, getSiteText } from './utils/i18n';
 import './styles.css';
 
 const sections: Record<SectionId, React.ComponentType> = {
@@ -18,15 +20,17 @@ const sections: Record<SectionId, React.ComponentType> = {
 };
 
 export default function App() {
+  const { language } = usePreferences();
+  const profile = getProfile(language);
+  const siteText = getSiteText(language);
   useEffect(() => {
     document.title = `${profile.name} · ${profile.headline}`;
-    document.documentElement.lang = siteConfig.language;
     document.querySelector('meta[name="description"]')?.setAttribute('content', profile.shortDescription);
-  });
+  }, [language, profile.headline, profile.name, profile.shortDescription]);
   return <div id="top" data-accent={siteConfig.accentColor}>
     <a className="skip-link" href="#main">{siteText.skipToContent}</a>
     <div className="page"><Header /><main id="main"><Hero />
-      {getNavigation().map((item, index) => {
+      {getNavigation(siteConfig, language).map((item, index) => {
         const Component = sections[item.id];
         return <section className={`content-section section-${item.id}`} id={item.id} key={item.id} aria-labelledby={`heading-${item.id}`}>
           <div className="section-heading"><div className="section-title"><span className="section-number" aria-hidden="true">{formatIndex(index)}</span><h2 id={`heading-${item.id}`}>{item.label}</h2></div><p>{item.eyebrow}</p></div>

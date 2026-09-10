@@ -49,9 +49,13 @@ export interface Education {
 export interface Certification { name: string; issuer: string; date: string; credentialUrl?: string | null }
 export interface SystemNode { id: string; label: string; description?: string; central?: boolean }
 export type SystemConnection = [string, string];
+export type Language = 'es' | 'en';
+export type Theme = 'light' | 'dark';
+export type ThemePreference = Theme | 'system';
 export type SectionId = 'about' | 'experience' | 'systems' | 'projects' | 'skills' | 'education' | 'certifications' | 'terminal' | 'contact';
 export interface SiteConfig {
-  language: string;
+  language: Language;
+  theme: ThemePreference;
   dateStyle: 'short' | 'long';
   accentColor: 'blue' | 'green' | 'violet';
   showAbout: boolean;

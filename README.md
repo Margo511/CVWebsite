@@ -26,13 +26,15 @@ npm run preview
 
 Empieza por [Cómo actualizar mi portfolio](docs/UPDATING_CONTENT.md). Incluye ejemplos y plantillas para cada actualización habitual.
 
-- `src/content/`: perfil, experiencia, proyectos, tecnologías, formación, certificaciones, redes, sistemas, navegación y textos/configuración globales.
+- `src/content/`: perfil, experiencia, proyectos, tecnologías, formación, certificaciones, redes, sistemas, navegación, traducciones y configuración global.
 - `src/types/content.ts`: contratos TypeScript.
 - `src/utils/`: fechas, orden, enlaces, selección de contenido y comandos de terminal.
 - `src/components/`: presentación reutilizable.
 - `public/cv/` y `public/projects/`: PDF e imágenes opcionales.
 
 La empresa actual se deriva del array de experiencias. La terminal calcula sus respuestas usando los mismos módulos que las secciones. Los proyectos se filtran antes de numerarlos; `featured` permite seleccionarlos como destacados. Secciones y menú comparten las mismas reglas de visibilidad.
+
+El visitante puede alternar español/inglés y tema claro/oscuro. Ambas preferencias persisten en su navegador. Los campos estructurales se definen una vez; `src/content/translations.ts` contiene únicamente las versiones inglesas de los textos traducibles.
 
 ## GitHub Pages
 

@@ -8,3 +8,4 @@ export * from './social';
 export * from './systems';
 export * from './site';
 export * from './navigation';
+export * from './translations';

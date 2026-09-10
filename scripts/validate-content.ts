@@ -60,6 +60,12 @@ for (const [from, to] of content.systemConnections) {
 required(content.profile.name, 'profile.name');
 required(content.profile.headline, 'profile.headline');
 try { new Intl.DateTimeFormat(content.siteConfig.language); } catch { errors.push('site.language: código de idioma inválido.'); }
+check(['system', 'light', 'dark'].includes(content.siteConfig.theme), 'site.theme: usa system, light o dark.');
+for (const id of content.experiences.map(item => item.id)) check(id in content.englishContent.experiences, `translations: falta la experiencia '${id}' en inglés.`);
+for (const id of content.projects.map(item => item.id)) check(id in content.englishContent.projects, `translations: falta el proyecto '${id}' en inglés.`);
+for (const id of content.education.map(item => item.id)) check(id in content.englishContent.education, `translations: falta la formación '${id}' en inglés.`);
+for (const id of content.systems.map(item => item.id)) check(id in content.englishContent.systems, `translations: falta el sistema '${id}' en inglés.`);
+for (const id of content.skillGroups.map(item => item.id)) check(id in content.englishContent.skillGroups, `translations: falta la categoría de tecnologías '${id}' en inglés.`);
 asset(content.siteConfig.cvPath, 'site.cvPath');
 if (errors.length) {
   console.error(`\nCorrige estos datos en src/content/:\n${errors.map(error => `- ${error}`).join('\n')}\n`);

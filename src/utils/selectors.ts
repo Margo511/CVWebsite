@@ -1,7 +1,9 @@
 import * as content from '../content';
 import type { SectionId, SiteConfig } from '../types/content';
+import type { Language } from '../types/content';
 import { getSocialLinks } from './links';
 import { getVisibleProjects, sortExperiences } from './sort';
+import { getTranslatedNavigation } from './i18n';
 
 export function getCurrentExperiences(items = content.experiences) {
   return sortExperiences(items).filter(item => item.current);
@@ -19,7 +21,7 @@ export function getSectionVisibility(config: SiteConfig = content.siteConfig, da
     contact: config.showContact && getSocialLinks(data.socialLinks).length > 0,
   };
 }
-export function getNavigation(config = content.siteConfig) {
+export function getNavigation(config = content.siteConfig, language: Language = config.language) {
   const visible = getSectionVisibility(config);
-  return content.navigation.filter(item => visible[item.id]);
+  return getTranslatedNavigation(language).filter(item => visible[item.id]);
 }

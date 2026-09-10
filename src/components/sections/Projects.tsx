@@ -1,9 +1,13 @@
-import { projects, siteText } from '../../content';
 import { formatIndex, getVisibleProjects } from '../../utils/sort';
 import { ExternalLink, ProjectImage, Tags } from '../ui/Primitives';
 import { externalUrl } from '../../utils/links';
+import { usePreferences } from '../Preferences';
+import { getProjects, getSiteText } from '../../utils/i18n';
 
 export function Projects() {
+  const { language } = usePreferences();
+  const projects = getProjects(language);
+  const siteText = getSiteText(language);
   return <div className="project-list">{getVisibleProjects(projects).map((project, index) => <article className="project" key={project.id}>
     <div className="project-number" aria-hidden="true">{formatIndex(index)}</div>
     <div className="project-content"><div className="project-heading"><h3>{project.title}</h3>{project.featured && <span className="featured">{siteText.featured}</span>}</div>

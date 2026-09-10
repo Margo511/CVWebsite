@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { siteText, systemConnections, systems } from '../../content';
+import { systemConnections } from '../../content';
+import { usePreferences } from '../Preferences';
+import { getSiteText, getSystems } from '../../utils/i18n';
 
 export function Systems() {
+  const { language } = usePreferences();
+  const siteText = getSiteText(language);
+  const systems = getSystems(language);
   const diagram = useRef<HTMLDivElement>(null);
   const nodes = useRef(new Map<string, HTMLDivElement>());
   const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>({});
@@ -24,7 +29,7 @@ export function Systems() {
     nodes.current.forEach(node => observer.observe(node));
     measure();
     return () => observer.disconnect();
-  }, [systems]);
+  }, [language]);
   return <div className="systems-wrap">
     <div className="systems-diagram" ref={diagram}>
       <svg className="system-lines" aria-hidden="true">
