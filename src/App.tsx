@@ -13,6 +13,7 @@ import type { SectionId } from './types/content';
 import { usePreferences } from './components/Preferences';
 import { getProfile, getSiteText } from './utils/i18n';
 import './styles.css';
+import './components/layout/editorial-shell.css';
 
 const sections: Record<SectionId, React.ComponentType> = {
   about: About, experience: Experience, projects: Projects, systems: Systems,
@@ -33,10 +34,10 @@ export default function App() {
       {getNavigation(siteConfig, language).map((item, index) => {
         const Component = sections[item.id];
         return <section className={`content-section section-${item.id}`} id={item.id} key={item.id} aria-labelledby={`heading-${item.id}`}>
-          <div className="section-heading"><div className="section-title"><span className="section-number" aria-hidden="true">{formatIndex(index)}</span><h2 id={`heading-${item.id}`}>{item.label}</h2></div><p>{item.eyebrow}</p></div>
+          <div className="section-heading"><div className="section-title"><span className="section-number" aria-hidden="true">{formatIndex(index)}</span><h2 id={`heading-${item.id}`} tabIndex={-1}>{item.label}</h2></div><p>{item.eyebrow}</p></div>
           <Component />
         </section>;
       })}
-    </main><footer><p>© {new Date().getFullYear()} {profile.name}<span>{siteText.footer}</span></p><a href="#top" aria-label={siteText.backToTop}>↑</a></footer></div>
+    </main><footer><p>© {new Date().getFullYear()} {profile.name}<span>{profile.specialization.join(' · ')}</span></p><a href="#top" aria-label={siteText.backToTop}>↑</a></footer></div>
   </div>;
 }
