@@ -29,10 +29,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .header-actions, .preferences, .language-switch { display: flex; align-items: center; }
 .header-actions { min-width: 0; gap: 24px; justify-content: flex-end; }
 .preferences { gap: 9px; flex: 0 0 auto; }
-.language-switch { border: 1px solid var(--line); border-radius: 4px; padding: 2px; }
+.language-switch { position: relative; isolation: isolate; border: 1px solid var(--line); border-radius: 4px; padding: 2px; }
+.language-switch::before { content: ''; position: absolute; z-index: -1; top: 2px; bottom: 2px; left: 2px; width: calc((100% - 4px) / 2); border-radius: 3px; background: var(--accent); transition: transform .24s ease, background-color .24s ease; }
+.language-switch[data-language='en']::before { transform: translateX(100%); }
 .language-switch button, .theme-toggle { border: 0; color: var(--muted); background: transparent; min-width: 34px; min-height: 34px; border-radius: 3px; font: 12px monospace; }
-.language-switch button.active { color: var(--button-text); background: var(--accent); font-weight: 700; }
-.theme-toggle { border: 1px solid var(--line); color: var(--text); font-size: 17px; }
+.language-switch button { flex: 1; transition: color .24s ease, background-color .24s ease; }
+.language-switch button span { display: inline-block; animation: preference-label .24s ease both; }
+.language-switch button.active { color: var(--button-text); font-weight: 700; }
+.theme-toggle { position: relative; border: 1px solid var(--line); color: var(--text); font-size: 17px; transition: color .24s ease, background-color .24s ease, border-color .24s ease; }
+.theme-icon { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; opacity: 0; filter: blur(3px); transform: rotate(-25deg) scale(.8); transition: opacity .24s ease, filter .24s ease, transform .24s ease; }
+.theme-icon-moon { transform: rotate(25deg) scale(.8); }
+.theme-icon.is-visible { opacity: 1; filter: blur(0); transform: rotate(0) scale(1); }
+@keyframes preference-label { from { opacity: .5; filter: blur(2px); } to { opacity: 1; filter: blur(0); } }
 .theme-toggle:hover, .language-switch button:not(.active):hover { color: var(--accent); background: var(--accent-soft); }
 .hero { padding: 58px 0 92px; }
 .hero-kicker { display: flex; justify-content: space-between; font-family: monospace; font-size: 13px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }

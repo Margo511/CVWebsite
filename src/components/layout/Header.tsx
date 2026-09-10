@@ -17,11 +17,12 @@ export function Header() {
         {navigation.map(item => <a key={item.id} href={`#${item.id}`} onClick={() => setOpen(false)}>{item.label}</a>)}
       </nav>
       <div className="preferences">
-        <div className="language-switch" role="group" aria-label={siteText.language}>
-          {(['es', 'en'] as const).map(code => <button type="button" key={code} className={language === code ? 'active' : ''} aria-pressed={language === code} onClick={() => setLanguage(code)}>{code.toUpperCase()}</button>)}
+        <div className="language-switch" data-language={language} role="group" aria-label={siteText.language}>
+          {(['es', 'en'] as const).map(code => <button type="button" key={code} className={language === code ? 'active' : ''} aria-pressed={language === code} onClick={() => setLanguage(code)}><span key={language}>{code.toUpperCase()}</span></button>)}
         </div>
         <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === 'dark' ? siteText.lightMode : siteText.darkMode} title={theme === 'dark' ? siteText.lightMode : siteText.darkMode}>
-          <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
+          <span className={`theme-icon theme-icon-sun${theme === 'dark' ? ' is-visible' : ''}`} aria-hidden="true">☀</span>
+          <span className={`theme-icon theme-icon-moon${theme === 'light' ? ' is-visible' : ''}`} aria-hidden="true">☾</span>
         </button>
         <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>{open ? siteText.closeMenu : siteText.menu}</button>
       </div>
