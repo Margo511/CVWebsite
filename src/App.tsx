@@ -14,6 +14,7 @@ import { usePreferences } from './components/Preferences';
 import { getProfile, getSiteText } from './utils/i18n';
 import './styles.css';
 import './components/layout/editorial-shell.css';
+import './components/sections/supporting-sections.css';
 
 const sections: Record<SectionId, React.ComponentType> = {
   about: About, experience: Experience, projects: Projects, systems: Systems,

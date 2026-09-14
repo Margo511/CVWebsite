@@ -7,8 +7,6 @@ import { usePreferences } from '../Preferences';
 import { getEducation, getSiteText } from '../../utils/i18n';
 import { getAppliedSkillGroups, supportingText } from '../../content/supporting-sections';
 
-if (typeof document !== 'undefined') void import('./supporting-sections.css');
-
 export function About() {
   const { language } = usePreferences();
   return <div className="about-copy supporting-about">{supportingText[language].about.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>;

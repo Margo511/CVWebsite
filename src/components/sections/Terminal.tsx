@@ -4,8 +4,6 @@ import { usePreferences } from '../Preferences';
 import { getSiteText } from '../../utils/i18n';
 import { supportingText } from '../../content/supporting-sections';
 
-if (typeof document !== 'undefined') void import('./supporting-sections.css');
-
 export function Terminal() {
   const { language } = usePreferences();
   const siteText = getSiteText(language);
