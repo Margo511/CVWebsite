@@ -12,6 +12,7 @@ import { formatIndex } from './utils/sort';
 import type { SectionId } from './types/content';
 import { usePreferences } from './components/Preferences';
 import { getProfile, getSiteText } from './utils/i18n';
+import { PointerParticles } from './components/effects/PointerParticles';
 import './styles.css';
 import './components/layout/editorial-shell.css';
 import './components/sections/supporting-sections.css';
@@ -30,6 +31,7 @@ export default function App() {
     document.querySelector('meta[name="description"]')?.setAttribute('content', profile.shortDescription);
   }, [language, profile.headline, profile.name, profile.shortDescription]);
   return <div id="top" data-accent={siteConfig.accentColor}>
+    <PointerParticles />
     <a className="skip-link" href="#main">{siteText.skipToContent}</a>
     <div className="page"><Header /><main id="main"><Hero />
       {getNavigation(siteConfig, language).map((item, index) => {
