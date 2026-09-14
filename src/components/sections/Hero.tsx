@@ -15,8 +15,11 @@ export function Hero() {
   const current = getCurrentExperiences(getExperiences(language));
   const cv = assetUrl(siteConfig.cvPath);
   return <section className="hero editorial-hero" aria-labelledby="hero-title">
-    <p className="editorial-location">{profile.location}</p>
-    <h1 id="hero-title" className="editorial-name">{profile.name}</h1>
+    <div className="hero-identity">
+      <div><p className="editorial-location">{profile.location}</p>
+      <h1 id="hero-title" className="editorial-name">{profile.name}</h1></div>
+      <img className="hero-portrait" src={assetUrl('/images/marcos-gomez.jpg')!} alt={language === 'es' ? 'Retrato de Marcos Gómez' : 'Portrait of Marcos Gómez'} width={1156} height={1654} fetchPriority="high" />
+    </div>
     <div className="editorial-role"><p>{profile.headline}</p><ul aria-label={language === 'es' ? 'Especialidades' : 'Specializations'}>{profile.specialization.map(item => <li key={item}>{item}</li>)}</ul></div>
     <div className="hero-bottom">
       <div><p className="hero-description">{text.description}</p><div className="hero-actions">

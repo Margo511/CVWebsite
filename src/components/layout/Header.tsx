@@ -26,7 +26,7 @@ export function Header() {
           <span className={`theme-icon theme-icon-sun${theme === 'dark' ? ' is-visible' : ''}`} aria-hidden="true">☀</span>
           <span className={`theme-icon theme-icon-moon${theme === 'light' ? ' is-visible' : ''}`} aria-hidden="true">☾</span>
         </button>
-        {navigation.length > 0 && <button ref={menuButton} className="menu-toggle" type="button" aria-label={open ? siteText.closeMenu : siteText.menu} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}><span aria-hidden="true">{open ? '×' : '☰'}</span></button>}
+        {navigation.length > 0 && <button ref={menuButton} className="menu-toggle" type="button" aria-label={open ? siteText.closeMenu : siteText.menu} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}><span className="menu-icon" aria-hidden="true"><span /><span /><span /></span></button>}
       </div>
       <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label={siteText.menu}>
         {navigation.map(item => <a key={item.id} href={`#${item.id}`} onClick={() => {

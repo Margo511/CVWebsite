@@ -1,5 +1,17 @@
 /* Scoped overrides: imported after the shared design tokens in App. */
-.editorial-header { position: relative; gap: 16px; flex-wrap: nowrap; }
+html { scroll-padding-top: 126px; }
+.editorial-header { position: sticky; top: 0; z-index: 30; background: var(--bg); gap: 16px; flex-wrap: nowrap; }
+.skip-link { z-index: 40; }
+.menu-icon { position: relative; display: block; width: 22px; height: 18px; margin: auto; }
+.menu-icon span { position: absolute; left: 0; width: 22px; height: 2px; border-radius: 1px; background: currentColor; transition: transform .22s ease, opacity .16s ease; }
+.menu-icon span:nth-child(1) { top: 0; }
+.menu-icon span:nth-child(2) { top: 8px; }
+.menu-icon span:nth-child(3) { top: 16px; }
+.menu-toggle[aria-expanded='true'] .menu-icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle[aria-expanded='true'] .menu-icon span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-toggle[aria-expanded='true'] .menu-icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.hero-identity { display: grid; grid-template-columns: minmax(0, 1fr) 176px; align-items: center; gap: 40px; }
+.hero-portrait { display: block; width: 176px; height: 210px; object-fit: cover; object-position: center 36%; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
 .editorial-header .brand { flex: 0 0 auto; }
 .editorial-header .header-actions { gap: 28px; }
 .editorial-header .navigation { order: -1; gap: 20px; }
@@ -24,23 +36,28 @@
 .editorial-hero .current-position span, .editorial-hero .current-position small { font-size: 14px; }
 .editorial-hero .hero-actions { gap: 16px 24px; margin-top: 28px; }
 @media (max-width: 1060px) {
+  html { scroll-padding-top: 102px; }
   .editorial-header .header-actions { flex: 1; }
-  .editorial-header .navigation { top: 100%; padding: 12px; box-shadow: 0 16px 24px #00000018; gap: 4px; }
+  .editorial-header .navigation { top: 100%; padding: 12px; box-shadow: 0 16px 24px #00000018; gap: 4px; max-height: calc(100dvh - 96px); overflow-y: auto; overscroll-behavior: contain; }
   .editorial-header .navigation.is-open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .editorial-header .navigation a { padding: 12px; min-height: 48px; font-size: 16px; }
 }
 @media (max-width: 800px) {
+  .hero-identity { grid-template-columns: minmax(0, 1fr) 112px; gap: 24px; }
+  .hero-portrait { width: 112px; height: 140px; }
   .editorial-hero .hero-bottom { grid-template-columns: 1fr; gap: 32px; }
   .editorial-hero .hero-aside { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
 }
 @media (max-width: 480px) {
+  .hero-identity { grid-template-columns: minmax(0, 1fr) 88px; gap: 16px; }
+  .hero-portrait { width: 88px; height: 112px; }
   .editorial-header { gap: 8px; }
   .editorial-header .preferences { gap: 6px; }
   .editorial-header .header-actions { gap: 0; }
   .editorial-header .navigation.is-open { grid-template-columns: 1fr; }
   .editorial-hero { padding: 32px 0 48px; }
   .editorial-location { margin-bottom: 24px; }
-  .editorial-hero .editorial-name { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .editorial-hero .editorial-name { font-size: clamp(2.35rem, 10vw, 3rem); }
   .editorial-role { gap: 16px; margin-top: 20px; }
   .editorial-hero .hero-bottom { margin-top: 28px; }
   .editorial-hero .hero-actions .button { width: 100%; }
