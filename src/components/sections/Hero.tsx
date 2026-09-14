@@ -18,7 +18,7 @@ export function Hero() {
     <div className="hero-identity">
       <div><p className="editorial-location">{profile.location}</p>
       <h1 id="hero-title" className="editorial-name">{profile.name}</h1></div>
-      <img className="hero-portrait" src={assetUrl('/images/marcos-gomez.jpg')!} alt={language === 'es' ? 'Retrato de Marcos Gómez' : 'Portrait of Marcos Gómez'} width={1156} height={1654} fetchPriority="high" />
+      <img className="hero-portrait" src={assetUrl('/images/marcos-gomez.png')!} alt={language === 'es' ? 'Retrato de Marcos Gómez' : 'Portrait of Marcos Gómez'} width={1122} height={1402} fetchPriority="high" />
     </div>
     <div className="editorial-role"><p>{profile.headline}</p><ul aria-label={language === 'es' ? 'Especialidades' : 'Specializations'}>{profile.specialization.map(item => <li key={item}>{item}</li>)}</ul></div>
     <div className="hero-bottom">

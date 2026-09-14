@@ -1,6 +1,7 @@
 /* Scoped overrides: imported after the shared design tokens in App. */
 html { scroll-padding-top: 126px; }
-.editorial-header { position: sticky; top: 0; z-index: 30; background: var(--bg); gap: 16px; flex-wrap: nowrap; }
+.editorial-header { position: sticky; top: 0; z-index: 30; background: var(--bg); border-bottom: 0; gap: 16px; flex-wrap: nowrap; isolation: isolate; }
+.editorial-header::after { content: ''; position: absolute; z-index: 20; right: 0; bottom: 0; left: 0; height: 1px; background: var(--line); pointer-events: none; }
 .skip-link { z-index: 40; }
 .menu-icon { position: relative; display: block; width: 22px; height: 18px; margin: auto; }
 .menu-icon span { position: absolute; left: 0; width: 22px; height: 2px; border-radius: 1px; background: currentColor; transition: transform .22s ease, opacity .16s ease; }
@@ -38,8 +39,8 @@ html { scroll-padding-top: 126px; }
 @media (max-width: 1060px) {
   html { scroll-padding-top: 102px; }
   .editorial-header .header-actions { flex: 1; }
-  .editorial-header .navigation { top: 100%; padding: 12px; box-shadow: 0 16px 24px #00000018; gap: 4px; max-height: calc(100dvh - 96px); overflow-y: auto; overscroll-behavior: contain; }
-  .editorial-header .navigation.is-open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .editorial-header .navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); top: 100%; padding: 12px; box-shadow: 0 16px 24px #00000018; gap: 4px; max-height: calc(100dvh - 96px); overflow-y: auto; overscroll-behavior: contain; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-10px); transform-origin: top; transition: opacity .2s ease, transform .24s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .24s; }
+  .editorial-header .navigation.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
   .editorial-header .navigation a { padding: 12px; min-height: 48px; font-size: 16px; }
 }
 @media (max-width: 800px) {
@@ -54,7 +55,7 @@ html { scroll-padding-top: 126px; }
   .editorial-header { gap: 8px; }
   .editorial-header .preferences { gap: 6px; }
   .editorial-header .header-actions { gap: 0; }
-  .editorial-header .navigation.is-open { grid-template-columns: 1fr; }
+  .editorial-header .navigation { grid-template-columns: 1fr; }
   .editorial-hero { padding: 32px 0 48px; }
   .editorial-location { margin-bottom: 24px; }
   .editorial-hero .editorial-name { font-size: clamp(2.35rem, 10vw, 3rem); }
